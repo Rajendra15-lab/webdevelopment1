@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Online shopping platform for various products.">
+    <title>Online Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        header {
+            background-color: rgb(35, 120, 160);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+        header h2{
+            float:left;
+            border-radius: 2px;
+            padding-left: 32px;
+            padding-top: 18px;
+            font-size:xx-large;
+        }
+
+        nav {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        nav a {
+            color: #8f2b2b;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            color: #97af1c;
+        }
+
+        .product-container {
+            display:grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 60px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .product-card .price {
+            font-size: 1.2rem;
+            color: green;
+            margin-bottom: 15px;
+        }
+
+        .product-card button {
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .product-card button:hover {
+            background-color: #005bb5;
+        }
+
+        .cart {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .cart span {
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgb(78, 101, 3);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        *, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+	overflow-y: scroll; 
+}
+
+body {
+  background:$body-bg;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+a {
+  text-decoration:none;
+  color:$main;
+  transition:.5s ease;
+  &:hover {
+    color:$main-dark;
+  }
+}
+
+.form {
+  background:rgba($form-bg,.9);
+  padding: 40px;
+  max-width:600px;
+  margin:40px auto;
+  border-radius:$br;
+  box-shadow:0 4px 10px 4px rgba($form-bg,.3);
+}
+
+.tab-group {
+  list-style:none;
+  padding:0;
+  margin:0 0 40px 0;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  li a {
+    display:block;
+    text-decoration:none;
+    padding:15px;
+    background:rgba($gray-light,.25);
+    color:$gray-light;
+    font-size:20px;
+    float:left;
+    width:50%;
+    text-align:center;
+    cursor:pointer;
+    transition:.5s ease;
+    &:hover {
+      background:$main-dark;
+      color:$white;
+    }
+  }
+  .active a {
+    background:$main;
+    color:$white;
+  }
+}
+
+.tab-content > div:last-child {
+  display:none;
+}
+
+
+h1 {
+  text-align:center;
+  color:$white;
+  font-weight:$thin;
+  margin:0 0 40px;
+}
+
+label {
+  position:absolute;
+  transform:translateY(6px);
+  left:13px;
+  color:rgba($white,.5);
+  transition:all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size:22px;
+  .req {
+  	margin:2px;
+  	color:$main;
+  }
+}
+
+label.active {
+  transform:translateY(50px);
+  left:2px;
+  font-size:14px;
+  .req {
+    opacity:0;
+  }
+}
+
+label.highlight {
+	color:$white;
+}
+
+input, textarea {
+  font-size:22px;
+  display:block;
+  width:100%;
+  height:100%;
+  padding:5px 10px;
+  background:none;
+  background-image:none;
+  border:1px solid $gray-light;
+  color:$white;
+  border-radius:0;
+  transition:border-color .25s ease, box-shadow .25s ease;
+  &:focus {
+		outline:0;
+		border-color:$main;
+  }
+}
+
+textarea {
+  border:2px solid $gray-light;
+  resize: vertical;
+}
+
+.field-wrap {
+  position:relative;
+  margin-bottom:40px;
+}
+
+.top-row {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  > div {
+    float:left;
+    width:48%;
+    margin-right:4%;
+    &:last-child { 
+      margin:0;
+    }
+  }
+}
+.button-block {
+  display:block;
+  width:100%;
+}
+
+.forgot {
+  margin-top:-20px;
+  text-align:right;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h2>UrbanCart</h2>
+        <h1>Welcome to Our Online Shop</h1>
+        <p>Shop the Best Products Online</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Contact Us</a>
+        <a href="#">About Us</a>
+    </nav>
+
+    <!-- Cart Button -->
+    <div class="cart" onclick="alert('Your Cart is Empty!')">
+        <i class="fa fa-shopping-cart"></i>
+        <span>Cart (0)</span>
+    </div>
+
+    <!-- Product -->
+    <div class="product-container">
+        <!-- Jackets -->
+        <div class="product-card">
+            <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/jacket/1/v/k/xxl-no-108-76d6141f-15army-chroes-original-imagmm7sqazbtrxj.jpeg?q=90&crop=false" alt="Product 1">
+            <h3>Men Jackets</h3>
+            <p>This is a great product that will make your life easier.</p>
+            <div class="price">Rs.3599/</div>
+            <button onclick="addToCart('Product 1')">Add to Cart</button>
+        </div>
+        
+        <!-- Shoes -->
+        <div class="product-card">
+            <img src="https://baccabucci.com/cdn/shop/products/MG_4645_d8350a5f-670e-4778-8e00-30d060f2abcb_800x.jpg?v=1634723562" alt="Product 2">
+            <h3>Casual Shoes</h3>
+            <p>A must-have item for any household.</p>
+            <div class="price">Rs.4899/</div>
+            <button onclick="addToCart('Product 2')">Add to Cart</button>
+        </div>
+
+        <!-- iPhones -->
+        <div class="product-card">
+            <img src="https://www.maplestore.in/cdn/shop/files/iPhone_15_Pro_Blue_Titanium_PDP_Image_Position-1__en-IN_b566cedb-ec09-4afd-9899-b726c06d3add.jpg?v=1701825864&width=823" alt="Product 3">
+            <h3>iPhones</h3>
+            <p>This product will help you stay organized and productive.</p>
+            <div class="price">Rs.59999/</div>
+            <button onclick="addToCart('Product 3')">Add to Cart</button>
+        </div>
+
+        <!-- watches-->
+        <div class="product-card">
+            <img src="https://images-cdn.ubuy.co.in/654b8e16333d0d5c3130b3e8-lige-mens-watches-waterproof-stainless.jpg" alt="Product 4">
+            <h3>Wrist Watches</h3>
+            <p>Get this amazing product with high ratings from our customers.</p>
+            <div class="price">Rs.1459/</div>
+            <button onclick="addToCart('Product 4')">Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Online Shop. All Rights Reserved.</p>
+        <p><a href="mailto:info@onlineshop.com">Contact Us</a></p>
+        <div class="form">
+      
+            <ul class="tab-group">
+              <li class="tab active"><a href="#signup">Sign Up</a></li>
+              <li class="tab"><a href="#login">Log In</a></li>
+            </ul>
+            
+            <div class="tab-content">
+              <div id="signup">   
+                <h1>Sign Up for Free</h1>
+                
+                <form action="/" method="post">
+                
+                <div class="top-row">
+                  <div class="field-wrap">
+                    <label>
+                      First Name<span class="req">*</span>
+                    </label>
+                    <input type="text" placeholder="First Name" size="10">
+                  </div>
+              
+                  <div class="field-wrap">
+                    <label>
+                      Last Name<span class="req">*</span>
+                    </label>
+                    <input type="text" placeholder="Last Name" size="10">
+                  </div>
+                </div>
+      
+                <div class="field-wrap">
+                  <label>
+                    Email Address<span class="req">*</span>
+                  </label>
+                  <input type="email"placeholder="Email" size="15">
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    Set A Password<span class="req">*</span>
+                  </label>
+                  <input type="password"placeholder="password" size="15">
+                </div>
+                
+                <button type="submit" class="button button-block"/>Get Started</button>
+                
+                </form>
+      
+              </div>
+              
+              <div id="login">   
+                <h1>Welcome Back!</h1>
+                
+                <form action="/" method="post">
+                
+                  <div class="field-wrap">
+                  <label>
+                    Email Address<span class="req">*</span>
+                  </label>
+                  <input type="email"placeholder="Email" size="15">
+                </div>
+                
+                <div class="field-wrap">
+                  <label>
+                    Password<span class="req">*</span>
+                  </label>
+                  <input type="password"placeholder="Email" size="15">
+                </div>
+                
+                <p class="forgot"><a href="#">Forgot Password?</a></p>
+                
+                <button class="button button-block"/>Log In</button>
+                
+                </form>
+      
+              </div>
+              
+            </div><!-- tab-content -->
+            
+      </div> <!-- /form -->
+    </footer>
+
+    <script>
+        let cartCount = 0;
+
+        function addToCart(product) {
+            cartCount++;
+            document.querySelector('.cart span').textContent = Cart (${cartCount});
+            alert(${product} has been added to your cart!);
+        }
+    </script>
+    
+</body>
+</html
